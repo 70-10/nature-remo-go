@@ -1,5 +1,9 @@
 package natureremo
 
+import (
+	"encoding/json"
+)
+
 type Appliance struct {
 	ID       string         `jons:"id"`
 	Device   DeviceCore     `json:"device`
@@ -46,13 +50,22 @@ type Modes struct {
 	Auto AirConRangeMode `json:"auto"`
 }
 type AirConRangeMode struct {
-	Temp string `json:"temp"`
-	Vol  string `json:"vol"`
-	Dir  string `json:"dir"`
+	Temp []string `json:"temp"`
+	Vol  []string `json:"vol"`
+	Dir  []string `json:"dir"`
 }
 
-type Signal struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Image string `json:"image"`
+func (c *Client) GetAppliances() ([]Appliance, error) {
+	resp, err := c.Get("/appliances")
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	appliances := make([]Appliance, 0)
+	err = json.NewDecoder(resp.Body).Decode(&appliances)
+	if err != nil {
+		return nil, err
+	}
+	return appliances, nil
 }

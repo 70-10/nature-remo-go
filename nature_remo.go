@@ -2,6 +2,7 @@ package natureremo
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"time"
@@ -29,6 +30,15 @@ func NewClient(token string) *Client {
 func (c *Client) Get(path string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", c.urlFor(path).String(), nil)
 
+	if err != nil {
+		return nil, err
+	}
+
+	return c.request(req)
+}
+
+func (c *Client) Post(path string, body io.Reader) (*http.Response, error) {
+	req, err := http.NewRequest("POST", c.urlFor(path).String(), body)
 	if err != nil {
 		return nil, err
 	}
