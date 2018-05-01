@@ -1,17 +1,8 @@
-package main
+package natureremo
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
 	"time"
-)
-
-const (
-	url   = "https://api.nature.global/1/devices"
-	token = ""
 )
 
 type SensorValue struct {
@@ -34,32 +25,16 @@ type Device struct {
 	NewestEvents      NewestEvents `json:"newest_events"`
 }
 
-func main() {
-	req, err := http.NewRequest("GET", url, nil)
+func (c *Client) GetDevices() ([]Device, error) {
+	resp, err := c.Get("/devices")
 	if err != nil {
-		log.Fatal(err)
-	}
-	req.Header.Set("Authorization", "Bearer "+token)
-
-	client := new(http.Client)
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer resp.Body.Close()
-
-	var d []Device
-	body, err := ioutil.ReadAll(resp.Body)
+	devices := make([]Device, 0)
+	err = json.NewDecoder(resp.Body).Decode(&devices)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-
-	err = json.Unmarshal(body, &d)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, device := range d {
-		fmt.Println(device)
-	}
+	return devices, nil
 }
