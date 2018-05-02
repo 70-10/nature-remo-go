@@ -13,6 +13,14 @@ func main() {
 }
 ```
 
+## CLI
+
+### Install
+
+```
+go get -u github.com/70-10/nature-remo-go/cmd/nature-remo
+```
+
 ## TODO
 
 * [x] `GET /1/users/me`
