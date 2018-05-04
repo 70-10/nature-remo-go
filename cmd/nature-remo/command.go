@@ -12,5 +12,10 @@ func Commands(meta *command.Meta) map[string]cli.CommandFactory {
 				Meta: *meta,
 			}, nil
 		},
+		"devices": func() (cli.Command, error) {
+			return &command.DevicesCommand{
+				Meta: *meta,
+			}, nil
+		},
 	}
 }
