@@ -1,8 +1,6 @@
 package command
 
 import (
-	"fmt"
-
 	"github.com/70-10/nature-remo-go"
 )
 
@@ -11,10 +9,6 @@ type DevicesCommand struct {
 }
 
 func (c *DevicesCommand) Run(args []string) int {
-	err := c.Config.Initialize()
-	if err != nil {
-		return ExitCodeInitializeConfigError
-	}
 
 	client := natureremo.NewClient(c.Config.Token)
 	devices, err := client.GetDevices()
@@ -23,7 +17,7 @@ func (c *DevicesCommand) Run(args []string) int {
 	}
 
 	for _, d := range devices {
-		fmt.Println(d.CreatedAt.Format("2006-01-02 15:04:05") + " " + d.ID + " " + d.Name + " " + d.FirmwareVersion)
+		c.Ui.Output(d.CreatedAt.Format("2006-01-02 15:04:05") + " " + d.ID + " " + d.Name + " " + d.FirmwareVersion)
 	}
 
 	return ExitCodeOK

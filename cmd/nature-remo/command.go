@@ -17,5 +17,20 @@ func Commands(meta *command.Meta) map[string]cli.CommandFactory {
 				Meta: *meta,
 			}, nil
 		},
+		"appliances": func() (cli.Command, error) {
+			return &command.AppliancesCommand{
+				Meta: *meta,
+			}, nil
+		},
+		"signals": func() (cli.Command, error) {
+			return &command.SignalsCommand{
+				Meta: *meta,
+			}, nil
+		},
+		"send": func() (cli.Command, error) {
+			return &command.SendSignalsCommand{
+				Meta: *meta,
+			}, nil
+		},
 	}
 }
