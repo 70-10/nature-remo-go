@@ -1,6 +1,8 @@
 package command
 
 import (
+	"fmt"
+
 	"github.com/70-10/nature-remo-go"
 )
 
@@ -16,8 +18,17 @@ func (c *DevicesCommand) Run(args []string) int {
 		return ExitCodeRunCommandError
 	}
 
-	for _, d := range devices {
-		c.Ui.Output(d.CreatedAt.Format("2006-01-02 15:04:05") + " " + d.ID + " " + d.Name + " " + d.FirmwareVersion)
+	for i, d := range devices {
+		if i != 0 {
+			c.Ui.Output("--------------------------------------------------------")
+		}
+
+		c.Ui.Output(fmt.Sprint("ID               : ", d.ID))
+		c.Ui.Output(fmt.Sprint("Name             : ", d.Name))
+		c.Ui.Output(fmt.Sprint("temperature      : ", d.NewestEvents.Te.Value))
+		c.Ui.Output(fmt.Sprint("humidity         : ", d.NewestEvents.Hu.Value))
+		c.Ui.Output(fmt.Sprint("Firmware Version : ", d.FirmwareVersion))
+		c.Ui.Output(fmt.Sprint("Created At       : ", d.CreatedAt.Format("2006-01-02 15:04:05")))
 	}
 
 	return ExitCodeOK

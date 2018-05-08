@@ -6,7 +6,7 @@ import (
 )
 
 type SensorValue struct {
-	Value     int       `json:"value"`
+	Value     float64   `json:"val"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
