@@ -6,7 +6,7 @@ import (
 
 type Appliance struct {
 	ID       string         `jons:"id"`
-	Device   DeviceCore     `json:"device`
+	Device   DeviceCore     `json:"device"`
 	Model    ApplianceModel `json:"model"`
 	Nickname string         `json:"nickname"`
 	Image    string         `json:"image"`
