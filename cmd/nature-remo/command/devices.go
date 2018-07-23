@@ -25,8 +25,9 @@ func (c *DevicesCommand) Run(args []string) int {
 
 		c.Ui.Output(fmt.Sprint("ID               : ", d.ID))
 		c.Ui.Output(fmt.Sprint("Name             : ", d.Name))
-		c.Ui.Output(fmt.Sprint("temperature      : ", d.NewestEvents.Te.Value))
-		c.Ui.Output(fmt.Sprint("humidity         : ", d.NewestEvents.Hu.Value))
+		c.Ui.Output(fmt.Sprint("Temperature      : ", d.NewestEvents.Temperature.Value))
+		c.Ui.Output(fmt.Sprint("Humidity         : ", d.NewestEvents.Humidity.Value))
+		c.Ui.Output(fmt.Sprint("Illumination     : ", d.NewestEvents.Illumination.Value))
 		c.Ui.Output(fmt.Sprint("Firmware Version : ", d.FirmwareVersion))
 		c.Ui.Output(fmt.Sprint("Created At       : ", d.CreatedAt.Format("2006-01-02 15:04:05")))
 	}

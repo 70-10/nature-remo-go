@@ -11,8 +11,9 @@ type SensorValue struct {
 }
 
 type NewestEvents struct {
-	Te SensorValue `json:"te"`
-	Hu SensorValue `json:"hu"`
+	Temperature  SensorValue `json:"te"`
+	Humidity     SensorValue `json:"hu"`
+	Illumination SensorValue `json:"il"`
 }
 type Device struct {
 	ID                string       `jons:"id"`
