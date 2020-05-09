@@ -23,6 +23,8 @@ type Device struct {
 	CreatedAt         time.Time    `json:"created_at"`
 	UpdatedAt         time.Time    `json:"updated_at"`
 	FirmwareVersion   string       `json:"firmware_version"`
+	MacAddress        string       `json:"mac_address"`
+	SerialNumber      string       `json:"serial_number"`
 	NewestEvents      NewestEvents `json:"newest_events"`
 }
 
